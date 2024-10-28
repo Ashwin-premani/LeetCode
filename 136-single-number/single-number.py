@@ -10,15 +10,16 @@ class Solution:
         # for i in lst:
         #     if i not in e:
         #         return i
-        # result =0
-        # result = result^i for i in nums
-        # return result
+        result =0
+        for i in nums:
+           result = result^i
+        return result
 
         
         
         
         
-        hash=Counter(nums)
-        for key,value in hash.items():
-            if value==1:
-                return key
+        # hash=Counter(nums)
+        # for key,value in hash.items():
+        #     if value==1:
+        #         return key
