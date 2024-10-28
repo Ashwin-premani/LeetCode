@@ -10,6 +10,9 @@ class Solution:
         # for i in lst:
         #     if i not in e:
         #         return i
+        # result =0
+        # result = result^i for i in nums
+        # return result
 
         
         
