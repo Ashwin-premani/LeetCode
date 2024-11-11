@@ -6,12 +6,20 @@ class Solution:
                     return False
             return True
         
+        primes = [False,False]
+        for i in range(2,max(nums)):
+            if is_prime(i):
+                primes.append(True)
+            else:
+                primes.append(False)
+
+
         prev = 0
         for n in nums:
             upper = n-prev # non inclusive
             largest_p = 0
             for i in reversed(range(2,upper)):
-                if is_prime(i):
+                if primes[i]:
                     largest_p = i
                     break
 
