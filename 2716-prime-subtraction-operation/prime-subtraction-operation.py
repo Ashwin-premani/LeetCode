@@ -6,22 +6,18 @@ class Solution:
                     return False
             return True
         
-        primes = [False,False]
+        primes = [0,0]
         for i in range(2,max(nums)):
             if is_prime(i):
-                primes.append(True)
+                primes.append(i)
             else:
-                primes.append(False)
+                primes.append(primes[i-1])
 
 
         prev = 0
         for n in nums:
             upper = n-prev # non inclusive
-            largest_p = 0
-            for i in reversed(range(2,upper)):
-                if primes[i]:
-                    largest_p = i
-                    break
+            largest_p = primes[upper - 1]
 
             if n-largest_p <= prev:
                 return False
