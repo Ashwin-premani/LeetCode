@@ -1,17 +1,42 @@
 class Solution:
     def maxProduct(self, nums: List[int]) -> int:
-        pre, suff = 1, 1
-        ans = min(nums)
+        pre = 1
+        suff = 1
+        ans = float('-inf')
         n = len(nums)
+        
         for i in range(n):
+            # Reset pre to 1 if it becomes 0
             if pre == 0:
                 pre = 1
+            # Reset suff to 1 if it becomes 0
             if suff == 0:
                 suff = 1
+                
+            # Calculate prefix product from left to right
             pre = pre * nums[i]
-            suff = suff * nums[n - i - 1]
-            ans = max(pre, suff, ans)
+            
+            # Calculate suffix product from right to left
+            suff = suff * nums[n-1-i]
+            
+            # Update the answer with maximum of current pre, suff, and previous ans
+            ans = max(ans, max(pre, suff))
+            
         return ans
+
+        
+        # pre, suff = 1, 1
+        # ans = min(nums)
+        # n = len(nums)
+        # for i in range(n):
+        #     if pre == 0:
+        #         pre = 1
+        #     if suff == 0:
+        #         suff = 1
+        #     pre = pre * nums[i]
+        #     suff = suff * nums[n - i - 1]
+        #     ans = max(pre, suff, ans)
+        # return ans
         
         # if len(nums) == 1:
         #     return nums[0]
