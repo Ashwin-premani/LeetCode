@@ -1,7 +1,5 @@
 class Solution:
     def reversePairs(self, nums: List[int]) -> int:
-        count = 0  # Initialize count as a normal variable
-        
         def merge(arr, low, mid, high):
             temp = []
             left = low
@@ -27,28 +25,29 @@ class Solution:
                 arr[i] = temp[i - low]
         
         def countpairs(arr, low, mid, high):
-            nonlocal count  # Access count from outer scope
+            count = 0  
             right = mid + 1
             for i in range(low, mid + 1):
                 while right <= high and arr[i] > 2 * arr[right]:  # Fixed comparison
                     right += 1
                 count += (right - (mid + 1))
+            return count
 
 
         def merge_sort(arr, low, high):
+            count = 0
             if low >= high:
-                return
-                
+                return count
             mid = (low + high) // 2
-            merge_sort(arr, low, mid)
-            merge_sort(arr, mid + 1, high)
-            countpairs(arr, low, mid, high)
+            count += merge_sort(arr, low, mid)
+            count += merge_sort(arr, mid + 1, high)
+            count += countpairs(arr, low, mid, high)
             merge(arr, low, mid, high)
+            return count
+            
         
         if not nums:
             return 0
             
         arr_copy = nums.copy()
-        merge_sort(arr_copy, 0, len(arr_copy) - 1)
-        
-        return count
+        return merge_sort(arr_copy, 0, len(arr_copy) - 1)
