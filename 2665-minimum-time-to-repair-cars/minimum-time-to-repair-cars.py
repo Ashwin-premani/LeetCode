@@ -1,7 +1,7 @@
 class Solution:
     def repairCars(self, ranks: List[int], cars: int) -> int:
         l = 1
-        r = max(ranks) * (cars**2)
+        r = ranks[0] * (cars**2)
         while l <= r:
             m = (l+r) // 2
             s = 0
