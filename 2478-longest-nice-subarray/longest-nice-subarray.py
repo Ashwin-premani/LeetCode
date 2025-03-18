@@ -4,11 +4,11 @@ class Solution:
         l = 0
         res = 1
         for r in range(len(nums)):
-            while a & nums[r]:
-                a ^= nums[l]  
+            while a & nums[r]: # here we have a which is or of all prev elements which means all 1's with position
+                a ^= nums[l]  # doing xor to remove or of removed element
                 l += 1         
             
-            a |= nums[r]  
+            a |= nums[r]  # or operation to have all 1's position to check if next eleemts satisfies & 
             res = max(res, r - l + 1) 
         return res
 
