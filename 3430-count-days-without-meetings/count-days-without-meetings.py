@@ -1,17 +1,22 @@
+from typing import List
+
 class Solution:
     def countDays(self, days: int, meetings: List[List[int]]) -> int:
         meetings.sort()
-        prev_start, prev_end = -1, -1
+        prev_end = -1
         occupied = 0
+
         for s, e in meetings:
             if s > prev_end:
                 occupied += e - s + 1
-                prev_start, prev_end = s, e
+                prev_end = e
             else:
                 if e > prev_end:
                     occupied += e - prev_end
                     prev_end = e
-        return days - occupied 
+
+        return days - occupied
+
 
 
         # Passed TLE but Memory Limit exceeded
