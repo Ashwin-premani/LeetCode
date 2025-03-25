@@ -1,20 +1,40 @@
 class Solution:
     def minFallingPathSum(self, matrix: List[List[int]]) -> int:
-        # tabulation
+        # Tabulation with optimization
         n = len(matrix)
-        dp = [[0] * n for _ in range(n)]
         if n == 1:
-            return matrix[0][0]
-        for j in range(n):
-            dp[0][j] = matrix[0][j]
+            return matrix[0][0]  
+        
+        prev = matrix[0][:]
 
-        for i in range(n):
+        for i in range(1, n):
+            cur = [0] * n
             for j in range(n):
-                up = dp[i-1][j]
-                left_diag = dp[i-1][j-1] if j > 0 else float('inf')
-                right_diag = dp[i-1][j+1] if j < n-1 else float('inf')
-                dp[i][j] = matrix[i][j] + min(up, left_diag, right_diag)
-        return min(dp[-1])
+                up = prev[j]
+                left_diag = prev[j-1] if j > 0 else float('inf')
+                right_diag = prev[j+1] if j < n-1 else float('inf')
+                cur[j] = matrix[i][j] + min(up, left_diag, right_diag)
+            prev = cur  
+        
+        return min(prev)  
+
+
+        # # tabulation
+        # n = len(matrix)
+        # dp = [[0] * n for _ in range(n)]
+        # if n == 1:
+        #     return matrix[0][0]
+        # for j in range(n):
+        #     dp[0][j] = matrix[0][j]
+
+        # for i in range(n):
+        #     for j in range(n):
+        #         up = dp[i-1][j]
+        #         left_diag = dp[i-1][j-1] if j > 0 else float('inf')
+        #         right_diag = dp[i-1][j+1] if j < n-1 else float('inf')
+        #         dp[i][j] = matrix[i][j] + min(up, left_diag, right_diag)
+        # return min(dp[-1])
+
 
         # Memoization (TLE)
         # n = len(matrix)
