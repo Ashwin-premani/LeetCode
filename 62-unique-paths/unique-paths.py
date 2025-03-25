@@ -1,5 +1,15 @@
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
+        N = m + n - 2  # Total moves
+        r = min(m - 1, n - 1)  # Moves in smaller dimension
+        res = 1
+        
+        # Use integer division to avoid floating-point precision issues
+        for i in range(1, r + 1):
+            res = res * (N - r + i) // i
+        
+        return res
+
         # tabulation space optimization
         dp = [0 for i in range(n)]
         for i in range(m):
