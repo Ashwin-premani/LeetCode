@@ -2,17 +2,17 @@ class Solution:
     def minimumTotal(self, triangle: List[List[int]]) -> int:
         # Tabulation wit space optimization
         n = len(triangle)
-        prev = triangle[-1][:]  # Initialize with the last row of the triangle
+        prev = triangle[-1][:] 
 
         for i in range(n - 2, -1, -1):
-            cur = [0] * len(triangle[i])  # Create a current row
+            cur = [0] * len(triangle[i])  
             for j in range(len(triangle[i])):
-                down = prev[j]  # Moving downward
-                diag = prev[j + 1]  # Moving diagonally
-                cur[j] = triangle[i][j] + min(down, diag)  # Store the minimum path sum
-            prev = cur  # Update previous row
+                down = prev[j] 
+                diag = prev[j + 1] 
+                cur[j] = triangle[i][j] + min(down, diag) 
+            prev = cur 
 
-        return prev[0]  # Top element contains the minimum path sum
+        return prev[0] 
 
 
 
