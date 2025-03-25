@@ -1,6 +1,14 @@
 class Solution:
     def minimumTotal(self, triangle: List[List[int]]) -> int:
-
+        # Tabulation
+        n = len(triangle)
+        dp = [row[:] for row in triangle]  
+        for i in range(n - 2, -1, -1):
+            for j in range(len(triangle[i])):
+                    diag = triangle[i][j] + dp[i+1][j+1]
+                    down = triangle[i][j] + dp[i+1][j]
+                    dp[i][j] = min(diag, down)
+        return dp[0][0]
 
         # Memoization
         n = len(triangle)  
