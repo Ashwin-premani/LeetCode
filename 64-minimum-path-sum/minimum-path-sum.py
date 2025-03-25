@@ -1,5 +1,19 @@
 class Solution:
     def minPathSum(self, grid: List[List[int]]) -> int:
+        # tabulation with space optimization
+        n, m = len(grid), len(grid[0])
+        prev = [float('inf')] * m
+        for i in range(n):
+            cur = [0] * m
+            for j in range(m):
+                if i == 0 and j == 0:
+                    cur[j] = grid[i][j]
+                else:
+                    left = prev[j] if i > 0 else float('inf')
+                    up = cur[j-1] if j > 0 else float('inf')
+                    cur[j] = grid[i][j] + min(up, left)
+            prev = cur
+        return prev[m-1]
 
         # Tabulation
         n, m = len(grid), len(grid[0])
