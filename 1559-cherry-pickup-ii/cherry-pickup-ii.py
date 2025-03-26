@@ -3,13 +3,14 @@ class Solution:
         # Tabulation
         n = len(grid)
         m = len(grid[0])
-        dp = [[[-1] * m for _ in range(m)] for _ in range(n)]
+        front = [[-1] * m for _ in range(m)]
+        cur = [[-1] * m for _ in range(m)]
         for j1 in range(m):
             for j2 in range(m):
                 if  j1 == j2:
-                    dp[n-1][j1][j2] = grid[n-1][j1]
+                    front[j1][j2] = grid[n-1][j1]
                 else:
-                    dp[n-1][j1][j2] = grid[n-1][j1] + grid[n-1][j2]
+                    front[j1][j2] = grid[n-1][j1] + grid[n-1][j2]
         dj = [-1, 0, 1]
         for i in range(n-2, -1, -1):
             for j1 in range(m):
@@ -22,13 +23,46 @@ class Solution:
                             else:
                                 value =  grid[i][j1] + grid[i][j2]
                             if 0 <= j1+dj1 < m and 0 <= j2+dj2 < m:
-                                value += dp[i+1][j1+dj1][j2+dj2]
+                                value += front[j1+dj1][j2+dj2]
                             else:
                                 value = float('-inf')
                             maxi = max(maxi, value)
-                    dp[i][j1][j2] = maxi
+                    cur[j1][j2] = maxi
+            front = [row[:] for row in cur]  # ✅ Deep copy
 
-        return dp[0][0][m-1]
+
+        return front[0][m-1]
+
+
+        # Tabulation
+        # n = len(grid)
+        # m = len(grid[0])
+        # dp = [[[-1] * m for _ in range(m)] for _ in range(n)]
+        # for j1 in range(m):
+        #     for j2 in range(m):
+        #         if  j1 == j2:
+        #             dp[n-1][j1][j2] = grid[n-1][j1]
+        #         else:
+        #             dp[n-1][j1][j2] = grid[n-1][j1] + grid[n-1][j2]
+        # dj = [-1, 0, 1]
+        # for i in range(n-2, -1, -1):
+        #     for j1 in range(m):
+        #         for j2 in range(m):
+        #             maxi = float('-inf')
+        #             for dj1 in dj:
+        #                 for dj2 in dj:
+        #                     if  j1 == j2:
+        #                         value = grid[i][j1]
+        #                     else:
+        #                         value =  grid[i][j1] + grid[i][j2]
+        #                     if 0 <= j1+dj1 < m and 0 <= j2+dj2 < m:
+        #                         value += dp[i+1][j1+dj1][j2+dj2]
+        #                     else:
+        #                         value = float('-inf')
+        #                     maxi = max(maxi, value)
+        #             dp[i][j1][j2] = maxi
+
+        # return dp[0][0][m-1]
 
 
         # Meomoization
