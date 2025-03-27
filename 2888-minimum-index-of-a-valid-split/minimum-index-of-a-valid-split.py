@@ -1,9 +1,6 @@
 class Solution:
     def minimumIndex(self, nums: List[int]) -> int:
-        # Voting Algo
-
-
-        # Hash
+        # Voting Algo (majority element)
         n = -1
         count = 0
 
@@ -12,6 +9,11 @@ class Solution:
                 n = num
             count += (1 if num == n else -1)
         x = sum(1 for num in nums if num == n)
+
+        # Hash
+        # count = Counter(nums)
+        # n, x = count.most_common(1)[0]
+
         y = 0
         for i in range(len(nums)):
             if nums[i] == n:
