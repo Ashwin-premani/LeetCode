@@ -1,15 +1,25 @@
-from typing import List
-
 class Solution:
     def putMarbles(self, weights: List[int], k: int) -> int:
         if k == 1:
             return 0
-        split = [weights[i] + weights[i+1] for i in range(len(weights) - 1)]
-        split.sort()
-        i = k - 1
-        max_score = weights[0] + weights[-1] + sum(split[-i:])
-        min_score = weights[0] + weights[-1] + sum(split[:i])
+
+        split = [weights[i] + weights[i + 1] for i in range(len(weights) - 1)]
+        
+        max_score = weights[0] + weights[-1] + sum(heapq.nlargest(k - 1, split))
+        min_score = weights[0] + weights[-1] + sum(heapq.nsmallest(k - 1, split))
+        
         return max_score - min_score
+
+        
+        # # Using sort
+        # if k == 1:
+        #     return 0
+        # split = [weights[i] + weights[i+1] for i in range(len(weights) - 1)]
+        # split.sort()
+        # i = k - 1
+        # max_score = weights[0] + weights[-1] + sum(split[-i:])
+        # min_score = weights[0] + weights[-1] + sum(split[:i])
+        # return max_score - min_score
 
 
         # Wrong answer after 10 test cases because k is not considered
