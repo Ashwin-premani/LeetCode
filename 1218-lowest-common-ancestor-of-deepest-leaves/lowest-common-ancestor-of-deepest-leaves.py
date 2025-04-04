@@ -6,18 +6,17 @@
 #         self.right = right
 class Solution:
     def lcaDeepestLeaves(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        # return (lowest commen ancestor, height)
-        def dfs(node):
+        # return (lowest commen ancestor, depth)
+        def dfs(node, depth):
             if not node:
-                return (None, 0)
-            left_node, lheight = dfs(node.left)
-            right_node, rheight = dfs(node.right)
-            if lheight == rheight:
-                return node, 1+lheight
-            elif lheight > rheight:
-                return left_node, lheight + 1
-            else:
-                return right_node, rheight + 1
+                return (None, depth + 1)
+            left_node, ldepth = dfs(node.left, depth + 1)
+            right_node, rdepth = dfs(node.right, depth + 1)
+            if ldepth > rdepth:
+                return left_node, ldepth
+            elif ldepth < rdepth:
+                return right_node, rdepth
+            return node, ldepth
             
-        node, _ = dfs(root)
+        node, _ = dfs(root, 0)
         return node
