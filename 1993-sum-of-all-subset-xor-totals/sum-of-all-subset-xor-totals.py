@@ -1,5 +1,11 @@
 class Solution:
     def subsetXORSum(self, nums: List[int]) -> int:
+        # optimized solution
+        xor_all = 0
+        for num in nums:
+            xor_all |= num  # Bitwise OR of all numbers
+        return xor_all * (1 << (len(nums) - 1))
+
         res = 0
         n = len(nums)
         def backtrack(i, xor):
