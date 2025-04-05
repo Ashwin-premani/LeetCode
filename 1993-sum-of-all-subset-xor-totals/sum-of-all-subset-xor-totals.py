@@ -1,6 +1,8 @@
 class Solution:
     def subsetXORSum(self, nums: List[int]) -> int:
-        # using OR
+        # using OR 
+        # here the intution is take all one's bit and multiplying it with respective number as no of times it occurs 
+        # so by taking or we get all one's in one numsber and we multiply let's say 4 or 100 by no of times that bit can occur so if or_all is 0111 we get 4*4 + 2*4 + 1*4 = 28
         or_all = 0
         for i in nums:
             or_all |= i
