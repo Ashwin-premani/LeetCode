@@ -1,11 +1,17 @@
 class Solution:
     def subsetXORSum(self, nums: List[int]) -> int:
+        # using OR
+        or_all = 0
+        for i in nums:
+            or_all |= i
+        return or_all * (2**(len(nums) - 1))
+
         def backtrack(i, xor):
             if i == len(nums):
                 return xor
             return backtrack(i+1, xor^nums[i]) + backtrack(i+1, xor)
         return backtrack(0, 0)
-        
+
         # optimized solution
         xor_all = 0
         for num in nums:
