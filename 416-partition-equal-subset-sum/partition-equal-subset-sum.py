@@ -1,5 +1,47 @@
 class Solution:
     def canPartition(self, nums: List[int]) -> bool:
+        totalSum = sum(nums)
+        if totalSum % 2 != 0:
+            return False
+        
+        target = totalSum // 2
+        dp = [False] * (target + 1)
+        dp[0] = True  # Zero sum is always possible
+
+        for num in nums:
+            for j in range(target, num - 1, -1):
+                dp[j] = dp[j] or dp[j - num]
+
+        return dp[target]
+
+
+        totalSum = sum(nums)
+        if totalSum % 2 != 0:  # Odd total sum can't be partitioned equally
+            return False
+
+        target = totalSum // 2
+        n = len(nums)
+        cache = {}
+        def dp(i, cursum):
+            if cursum == target:
+                return True
+            if i >= n or target < cursum:
+                return False
+            if (i, cursum) in cache:
+                return cache[(i, cursum)]
+            take = dp(i + 1, cursum + nums[i])
+            not_take = dp(i + 1, cursum)
+            cache[(i, cursum)] = (take or not_take)
+            return cache[(i, cursum)]
+        return dp(0, 0)
+
+
+
+
+
+
+
+
         def subsetsum(n, k, arr):
             prev = [False] * (k+1)
         
