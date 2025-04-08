@@ -1,5 +1,14 @@
 class Solution:
     def minimumOperations(self, nums: List[int]) -> int:
+        # reverse
+        seen = set()
+        for i in range(len(nums) - 1, -1, -1):
+            if nums[i] in seen:
+                return i // 3 + 1
+            seen.add(nums[i])
+        return 0
+
+        # linear
         operations = 0
         seen  = set()
         i = 0
