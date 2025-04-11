@@ -1,5 +1,19 @@
 class Solution:
     def countSymmetricIntegers(self, low: int, high: int) -> int:
+        def digit_sum(num_str):
+            return sum(int(ch) for ch in num_str)
+
+        res = 0
+        for i in range(low, high + 1):
+            s = str(i)
+            n = len(s)
+            if n % 2 == 0:
+                mid = n // 2
+                if digit_sum(s[:mid]) == digit_sum(s[mid:]):
+                    res += 1
+        return res
+
+
         res = 0
         for i in range(low, high + 1):
             f = str(i)
