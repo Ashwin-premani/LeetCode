@@ -10,7 +10,7 @@ class Solution:
                     res = (res * x) % MOD
                 n = n // 2
                 x = (x * x) % MOD
-            return res * x if n == 1 else res
+            return res * x
         even = ceil(n/2)
         odd = n // 2
         return (pow(5, even) * pow(4, odd)) % MOD
