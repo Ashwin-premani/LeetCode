@@ -1,5 +1,27 @@
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
+        # Tabulation with space optimization
+        n = len(coins)
+        prev = [0] * (amount + 1)
+        for a in range(amount+1):
+            if a % coins[0] == 0:
+                prev[a] = a //   coins[0]
+            else:
+                prev[a] = float('inf')
+        
+        for i in range(1, n):
+            cur = [0] * (amount + 1)
+            for a in range(amount+1):
+                not_take = prev[a]
+                take = float('inf')
+                if coins[i] <= a:
+                    take = 1 + cur[a- coins[i]]
+                cur[a] = min(not_take, take)
+            prev = cur.copy()
+                
+        res = prev[amount]
+        return -1 if res >= float('inf') else int(res)
+        
         # Tabulation
         n = len(coins)
         dp = [[0] * (amount + 1) for _ in range(n)]
