@@ -1,5 +1,27 @@
 class Solution:
     def change(self, amount: int, coins: List[int]) -> int:
+        # tabulation with space optimization
+        n = len(coins)
+        prev = [0] * (amount + 1)
+        for i in range(n):
+            prev[0] = 1
+        
+        for a in range(amount + 1):
+            if a % coins[0] == 0:
+                prev[a] = 1
+
+        for i in range(1,n):
+            cur = [0] * (amount+1)
+            for a in range(amount + 1):
+                not_take = prev[a]
+                take = 0
+                if coins[i] <= a:
+                    take = cur[a - coins[i]]
+                cur[a] = take + not_take
+            prev = cur.copy()
+        return prev[amount]
+
+
         # tabulation
         n = len(coins)
         dp = [[0] * (amount + 1) for _ in range(n)]
