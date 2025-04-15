@@ -1,5 +1,38 @@
 class Solution:
+    def findWays(self, arr: List[int], k: int) -> int:
+        MOD = 10**9 + 7
+        n = len(arr)
+        prev = [0] * (k + 1)
+        prev[0] = 1
+
+        if arr[0] <= k and arr[0] != 0:
+            prev[arr[0]] = 1
+        elif arr[0] == 0:
+            prev[0] = 2  # Because we can include or exclude the 0
+
+        for i in range(1, n):
+            cur = [0] * (k + 1)
+            for s in range(k + 1):
+                not_pick = prev[s]
+                pick = prev[s - arr[i]] if arr[i] <= s else 0
+                cur[s] = (pick + not_pick) % MOD
+            prev = cur
+
+        return prev[k]
+
+    def countPartitions(self, d: int, arr: List[int]) -> int:
+        total_sum = sum(arr)
+        MOD = 10**9 + 7
+        if (total_sum - d) < 0 or (total_sum - d) % 2 != 0:
+            return 0
+        target = (total_sum - d) // 2
+        return self.findWays(arr, target)
+
     def findTargetSumWays(self, nums: List[int], target: int) -> int:
+        return self.countPartitions(target, nums)
+
+
+
         # Memoization
         dp = {}
         def f(i, cur):
