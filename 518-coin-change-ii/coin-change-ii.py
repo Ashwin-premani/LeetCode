@@ -1,5 +1,16 @@
 class Solution:
     def change(self, amount: int, coins: List[int]) -> int:
+        n = len(coins)
+        dp = [0] * (amount + 1)
+        dp[0] = 1  # 1 way to make amount 0: use no coins
+
+        for coin in coins:
+            for v in range(coin, amount + 1):
+                dp[v] += dp[v - coin]
+
+        return dp[amount]
+
+
         # tabulation with space optimization
         n = len(coins)
         prev = [0] * (amount + 1)
