@@ -1,5 +1,8 @@
 class Solution:
     def minDistance(self, word1: str, word2: str) -> int:
+
+
+        # Tabulation
         def longestPalindromeSubseq(self, s: str, t: str) -> int:
             def longestCommonSubsequence(self, text1: str, text2: str) -> int:
                 n = len(text1)
@@ -17,4 +20,5 @@ class Solution:
                             
                 return prev[m]
             return longestCommonSubsequence(self, s, t)
-        return (len(word1) - longestPalindromeSubseq(self, word1, word2)) + (len(word2) - longestPalindromeSubseq(self, word1, word2)) 
+        val = longestPalindromeSubseq(self, word1, word2)
+        return (len(word1) - val) + (len(word2) - val) 
