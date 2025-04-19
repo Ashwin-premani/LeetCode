@@ -11,8 +11,8 @@ class Solution:
             else:
                 prev[j] = False
                 
+        cur = [False] * (m+1)
         for i in range(1, n+1):
-            cur = [False] * (m+1)
             cur[0] = False
             for j in range(1, m+1):
                 if s[i-1] == p[j-1] or p[j-1] == '?':
