@@ -1,5 +1,6 @@
 class Solution:
     def shortestCommonSupersequence(self, str1: str, str2: str) -> str:
+        # using string
         n = len(str1)
         m = len(str2)
         
