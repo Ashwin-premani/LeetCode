@@ -3,7 +3,8 @@ class Solution:
         from collections import defaultdict
 
         count = defaultdict(int)
-        max_size = 0 
+        max_size = 0
+        c = 0  
 
         def sum_of_digits(x):
             return sum(int(d) for d in str(x))
@@ -11,9 +12,14 @@ class Solution:
         for i in range(1, n + 1):
             s = sum_of_digits(i)
             count[s] += 1
-            max_size = max(max_size, count[s])
+            if count[s] > max_size:
+                max_size = count[s]
+                c = 1
+            elif count[s] == max_size:
+                c += 1
 
-        return sum(1 for v in count.values() if v == max_size)
+        return c
+
 
 
 
