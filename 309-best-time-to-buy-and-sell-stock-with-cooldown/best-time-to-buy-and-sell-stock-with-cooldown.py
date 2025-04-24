@@ -1,5 +1,23 @@
 class Solution:
-    def maxProfit(self, prices: List[int]) -> int:
+    def maxProfit(self, prices):
+        n = len(prices)
+        front2 = [0, 0]
+        front1 = [0, 0]
+        cur = [0, 0]
+
+        for ind in range(n - 1, -1, -1):
+            # When we can buy (buy = 1)
+            cur[1] = max(-prices[ind] + front1[0], front1[1])
+
+            # When we can sell (buy = 0)
+            cur[0] = max(prices[ind] + front2[1], front1[0])
+
+            front2 = front1[:]
+            front1 = cur[:]
+
+        return cur[1]
+
+        # tabulation
         n = len(prices)
         if n == 0:
             return 0
