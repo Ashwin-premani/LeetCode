@@ -3,6 +3,26 @@ from typing import List
 class Solution:
     def maxProfit(self, k: int, prices: List[int]) -> int:
         n = len(prices)
+        memo = {}
+
+        def dp(i: int, trans: int) -> int:
+            if i == n or trans == 2 * k:
+                return 0
+            if (i, trans) in memo:
+                return memo[(i, trans)]
+            
+            if trans % 2 == 0:
+                memo[(i, trans)] = max(-prices[i] + dp(i + 1, trans + 1), dp(i + 1, trans))
+            else:
+                memo[(i, trans)] = max(prices[i] + dp(i + 1, trans + 1), dp(i + 1, trans))
+            
+            return memo[(i, trans)]
+
+        return dp(0, 0)
+
+
+        # tabulation space optimized
+        n = len(prices)
         if not prices or k == 0:
             return 0
 
