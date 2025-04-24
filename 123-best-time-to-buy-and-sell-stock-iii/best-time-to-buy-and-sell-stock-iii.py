@@ -1,7 +1,22 @@
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         # Tabulation
+        n = len(prices)
+        dp = [[[0] * 3 for _ in range((2))]for _ in range(n+1)]
 
+        for i in range(n-1, -1, -1):
+            for b in range(2):
+                for t in range(2,-1,-1):
+                    if b:
+                        sell = prices[i] + dp[i+1][0][t+1] if t < 2 else 0
+                        skip = dp[i+1][1][t]
+                        dp[i][1][t] = max(sell, skip)
+                    else:
+                        buy = -prices[i] + dp[i+1][1][t]
+                        skip = dp[i+1][0][t]
+                        dp[i][0][t] = max(buy, skip)
+        return dp[0][0][0]
+                    
 
         # LRu cache
         @lru_cache(maxsize=None)
