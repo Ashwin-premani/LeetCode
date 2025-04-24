@@ -2,6 +2,25 @@ class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         # Tabulation
         n = len(prices)
+        ahead = [[0] * 3 for _ in range(2)]
+        cur = [[0] * 3 for _ in range(2)]
+        for i in range(n-1, -1, -1):
+            for b in range(2):
+                for t in range(2,-1,-1):
+                    if b:
+                        sell = prices[i] + ahead[0][t+1] if t < 2 else 0
+                        skip = ahead[1][t]
+                        cur[1][t] = max(sell, skip)
+                    else:
+                        buy = -prices[i] + ahead[1][t]
+                        skip = ahead[0][t]
+                        cur[0][t] = max(buy, skip)
+                ahead = cur.copy()
+        return ahead[0][0]
+
+
+        # Tabulation
+        n = len(prices)
         dp = [[[0] * 3 for _ in range((2))]for _ in range(n+1)]
 
         for i in range(n-1, -1, -1):
