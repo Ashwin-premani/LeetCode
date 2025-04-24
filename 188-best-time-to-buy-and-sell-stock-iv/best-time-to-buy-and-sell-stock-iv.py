@@ -1,6 +1,22 @@
 class Solution:
     def maxProfit(self, k: int, prices: List[int]) -> int:
-        # using n x 4
+        # Tabulation using n x 4
+        n = len(prices)
+        dp = [[0] * (2*k + 1) for _ in range(n+1)]
+        if k >= n // 2:
+            return sum(max(prices[i+1] - prices[i], 0) for i in range(n - 1))
+        for i in range(n-1, -1, -1):
+            for t in range(2*k-1, -1, -1):
+                if t % 2 == 0:
+                    # Buy
+                    dp[i][t] = max(-prices[i] + dp[i+1][t+1], dp[i+1][t])
+                else:
+                    # Sell
+                    dp[i][t] = max(prices[i] + dp[i+1][t+1], dp[i+1][t])
+
+        return dp[0][0]
+
+        # Memoization using n x 4
         n = len(prices)
         dp = {}
         def f(i, t):
