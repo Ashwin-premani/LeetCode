@@ -1,25 +1,19 @@
-from typing import List
-
 class Solution:
     def maxProfit(self, k: int, prices: List[int]) -> int:
+        # using n x 4
         n = len(prices)
-        memo = {}
-
-        def dp(i: int, trans: int) -> int:
-            if i == n or trans == 2 * k:
+        dp = {}
+        def f(i, t):
+            if i == n or t == 2*k:
                 return 0
-            if (i, trans) in memo:
-                return memo[(i, trans)]
-            
-            if trans % 2 == 0:
-                memo[(i, trans)] = max(-prices[i] + dp(i + 1, trans + 1), dp(i + 1, trans))
-            else:
-                memo[(i, trans)] = max(prices[i] + dp(i + 1, trans + 1), dp(i + 1, trans))
-            
-            return memo[(i, trans)]
-
-        return dp(0, 0)
-
+            if (i, t) in dp:
+                return dp[(i, t)]
+            if t % 2 == 0:
+                dp[(i, t)] =  max(-prices[i] + f(i+1, t+1), f(i+1, t))
+                return dp[(i, t)]
+            dp[(i, t)] =  max(prices[i] + f(i+1, t+1), f(i+1, t))
+            return dp[(i, t)]
+        return f(0 , 0)
 
         # tabulation space optimized
         n = len(prices)
