@@ -1,6 +1,6 @@
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        # Tabulation
+        # Tabulation space optimized
         n = len(prices)
         ahead = [[0] * 3 for _ in range(2)]
         cur = [[0] * 3 for _ in range(2)]
