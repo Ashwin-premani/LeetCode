@@ -6,8 +6,8 @@ class Solution:
 
         for r in range(len(nums)):
             s += nums[r]
-            while (r - l + 1) * s >= k and l <= r:
+            while (r-l+1) * s >= k and l <= r:
                 s -= nums[l]
                 l += 1
-            res += r - l + 1
+            res += (r-l+1)
         return res
