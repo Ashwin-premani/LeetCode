@@ -9,5 +9,5 @@ class Solution:
             while (r-l+1) * s >= k and l <= r:
                 s -= nums[l]
                 l += 1
-            res += (r-l+1)
+            res += (r - l + 1)
         return res
