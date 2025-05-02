@@ -5,16 +5,26 @@ class Solution:
         word=""
         n=len(word1)
         m=len(word2)
-        while i < n and j < m:
-            word += word1[i] +word2[j]
-            j += 1
-            i += 1
-        while i < n:
-            word += word1[i]
-            i += 1
-        while j < m:
-            word += word2[j]
-            j += 1
+        # one way
+        # while i < n and j < m:
+        #     word += word1[i] +word2[j]
+        #     j += 1
+        #     i += 1
+        # while i < n:
+        #     word += word1[i]
+        #     i += 1
+        # while j < m:
+        #     word += word2[j]
+        #     j += 1
+
+        # Other way
+        for i in range(min(len(word1), len(word2))):
+            word += word1[i] + word2[i]
+        # word += word1[i+1:] + word2[i+1:]
+
+        i = min(len(word1), len(word2))
+        word += word1[i:] + word2[i:]
+
         return word
 
 
