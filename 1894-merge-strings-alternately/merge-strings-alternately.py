@@ -20,8 +20,8 @@ class Solution:
         # Other way
         for i in range(min(len(word1), len(word2))):
             word += word1[i] + word2[i]
-        # word += word1[i+1:] + word2[i+1:]
-
+        # word += word1[i+1:] + word2[i+1:] one way to do it
+        # clever way
         i = min(len(word1), len(word2))
         word += word1[i:] + word2[i:]
 
