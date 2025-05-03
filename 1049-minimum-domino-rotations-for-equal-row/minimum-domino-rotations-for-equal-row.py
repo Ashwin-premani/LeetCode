@@ -12,8 +12,10 @@ class Solution:
                 elif tops[i] != num and bottoms[i] == num:
                     top += 1
             return min(top, bottom)
+
         res = min(check(tops[0]), check(bottoms[0]))
         return res if res != float('inf') else -1
+
         
 
         # brute Force (trying every number from 1 to 6 and taking min and valid)
