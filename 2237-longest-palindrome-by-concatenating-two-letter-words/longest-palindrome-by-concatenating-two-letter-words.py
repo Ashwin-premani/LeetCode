@@ -1,25 +1,5 @@
 class Solution:
     def longestPalindrome(self, words: List[str]) -> int:
-        mp = {}
-        result = 0
-
-        for word in words:
-            reversed_word = word[::-1]
-            if mp.get(reversed_word, 0) > 0:
-                result += 4
-                mp[reversed_word] -= 1
-            else:
-                mp[word] = mp.get(word, 0) + 1
-
-        for word, count in mp.items():
-            if word[0] == word[1] and count > 0:
-                result += 2
-                break
-
-        return result
-
-
-        
         word_count = {}
         res = 0
         has_middle = False
