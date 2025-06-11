@@ -1,5 +1,6 @@
 class Solution:
     def minCost(self, n: int, cuts: List[int]) -> int:
+        # Memoization
         cuts = [0] + sorted(cuts) + [n]
         c = len(cuts)
 
