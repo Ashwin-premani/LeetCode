@@ -1,15 +1,14 @@
 class Solution:
     def longestSubsequence(self, s: str, k: int) -> int:
         n = len(s)
-        count_zeros = s.count('0')
-        res = count_zeros  
-
-        val = 0
+        count = s.count('0')
+        res = count
         power = 0
+        val = 0
 
-        for i in range(n - 1, -1, -1):
+        for i in range(n-1, -1, -1):
             if s[i] == '1':
-                if power < 32: 
+                if power < 32:
                     val += 1 << power
                     if val <= k:
                         res += 1
@@ -18,7 +17,6 @@ class Solution:
                 power += 1
             else:
                 power += 1
-
         return res
 
         # MLE
