@@ -1,5 +1,17 @@
 class Solution:
     def maxSubsequence(self, nums: List[int], k: int) -> List[int]:
+        # using heap
+        heap = [(-nums[i], i) for i in range(len(nums))]
+        heapq.heapify(heap)
+
+        top_k = [heapq.heappop(heap) for _ in range(k)]
+        top_k.sort(key=lambda x: x[1])
+        res = [nums[i] for _, i in top_k]
+        return res
+        
+
+
+
         # Brute Force -> using sorting
         indexed_nums = [(num, i) for i, num in enumerate(nums)]
         
