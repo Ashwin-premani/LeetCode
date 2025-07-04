@@ -1,6 +1,5 @@
 class Solution:
     def kthCharacter(self, k: int, operations: List[int]) -> str:
-        # wrong answer -> 900 / 901
         lengths = [1]
         limit = 0
         
