@@ -5,6 +5,14 @@
 #         self.next = next
 class Solution:
     def getDecimalValue(self, head: Optional[ListNode]) -> int:
+        a=[]
+        while head:
+            a.append(str(head.val))
+            head=head.next
+        x="".join(a)
+        return int(x,2)
+
+        # Linear solution -> convert linkedlist to a list and traverse in reverse to add num in res as power of 2
         l = 0
         res = 0
         s = []
