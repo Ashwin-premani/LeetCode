@@ -13,9 +13,11 @@ class Solution:
                 left[i] = stack[-1] + 1
             stack.append(i)
             
-        while stack:
-            stack.pop()
+        # while stack:
+        #     stack.pop()
         
+        stack = []
+
         for i in range(n-1, -1, -1):
             while stack and heights[stack[-1]] >= heights[i]:
                 stack.pop()
