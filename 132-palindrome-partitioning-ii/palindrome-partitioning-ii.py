@@ -1,6 +1,8 @@
 class Solution:
     def minCut(self, s: str) -> int:
         # Tabulation
+        if s == s[::-1]: return 0
+        
         n = len(s)
         dp = [0] * (n + 1)  
         dp[n] = 0
