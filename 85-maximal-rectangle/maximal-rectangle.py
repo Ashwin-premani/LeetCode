@@ -4,6 +4,10 @@ class Solution(object):
         :type matrix: List[List[str]]
         :rtype: int
         """
+        # here we have used largest area of histogram leetcode 84 which takes heigh
+        # i have converted each row x upto jth col into a histogram by adding new rows to prev one and if new one contains a 0 height is reset to 0 and for each row max is calculated and updated 
+        # O(n⋅m) - Time
+        # O(m) - Space
         def histogram(heights):
             stack = []
             max_area = 0
@@ -30,7 +34,7 @@ class Solution(object):
             for j in range(m):
                 if matrix[i][j] == '1':
                     hist[j] += 1
-                elif matrix[i][j] == "0":
+                else:
                     hist[j] = 0
             area = histogram(hist)
             max_area = max(max_area, area)
