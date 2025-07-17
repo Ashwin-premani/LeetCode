@@ -36,6 +36,17 @@ class Solution(object):
                     hist[j] += 1
                 else:
                     hist[j] = 0
-            area = histogram(hist)
-            max_area = max(max_area, area)
+            # using stack
+            stack = []
+            for k in range(m + 1):
+                current_height = hist[k] if k < m else 0  # Add dummy 0 height at end
+                while stack and hist[stack[-1]] >= current_height:
+                    height = hist[stack.pop()]
+                    width = k if not stack else k - stack[-1] - 1
+                    max_area = max(max_area, width * height)
+                stack.append(k)
+
+            # normal
+            # area = histogram(hist)
+            # max_area = max(max_area, area)
         return max_area
