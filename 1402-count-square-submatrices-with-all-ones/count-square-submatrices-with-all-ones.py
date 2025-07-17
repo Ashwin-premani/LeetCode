@@ -1,18 +1,17 @@
 class Solution:
     def countSquares(self, matrix: List[List[int]]) -> int:
-        rows,cols = len(matrix),len(matrix[0])
-        cache  = {}
-        def dfs(r,c):
-            if r == rows or c == cols or not matrix[r][c]:
-                return 0
-            if (r,c) in cache:
-                return cache[(r,c)]
-            cache[(r,c)] = 1 + min(dfs(r+1,c),dfs(r,c+1),dfs(r+1,c+1))
-            return cache[(r,c)]
-
-        res = 0
-        for r in range(rows):
-            for c in range(cols):
-                res += dfs(r,c)
-
-        return res
+        n = len(matrix)
+        m = len(matrix[0])
+        dp = [[0] * m for _ in range(n)]
+        for i in range(n):
+            dp[i][0] = matrix[i][0]
+        for i in range(m):
+            dp[0][i] = matrix[0][i]
+        
+        for i in range(1, n):
+            for j in range(1, m):
+                if matrix[i][j] == 1:
+                    dp[i][j] = min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]) + 1
+                else:
+                    dp[i][j] = 0
+        return sum(sum(i) for i in dp)
